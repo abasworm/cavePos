@@ -1,0 +1,84 @@
+form#fmain.form-horizontal
+    input#uid(type='hidden', name='uid', value=ids)
+    .box-body
+        #alertbox.alert.alert-warning
+            a#closeAlert.close.btn.btn-sm(href='javascript:;')
+                i.fa.fa-times
+            text#message
+        .row
+            .col-md-12
+                .form-group.row
+                    label.col-sm-3.control-label(for='eg_email') Email 
+                        span.text-danger *
+                    .col-sm-8
+                        input#eg_email.form-control.is-invalid(name="eg_email",type='email',placeholder='Email')
+                #pass.form-group.row
+                    label.col-sm-3.control-label(for='eg_password') Password
+                        span.text-danger *
+                    .col-sm-4
+                        input#eg_password.form-control(name="eg_password",type='password',placeholder='Password')
+                    .col-sm-4
+                        input#eg_confpassword.form-control(name="eg_confpassword",type='password',placeholder='Confirm Password')
+                .form-group.row 
+                    label.col-sm-3.control-label(for='eg_name') Nama Lengkap
+                        span.text-danger *
+                    .col-sm-8
+                        input#eg_name.form-control(name="eg_name",type='text',placeholder='Name')
+                .form-group.row 
+                    label.col-sm-3.control-label(for='eg_customer_no') Customer No
+                        span.text-danger *
+                    .col-sm-8
+                        input#eg_customer_no.form-control(name="eg_customer_no",type='text',placeholder='Customer No')
+                .form-group.row 
+                    label.col-sm-3.control-label(for='eg_phone') No Telphone
+                    .col-sm-8
+                        input#eg_phone.form-control(name="eg_phone",type='text',placeholder='No Telpon')
+                .form-group.row 
+                    label.col-sm-3.control-label(for='eg_partner') Partner
+                        span.text-danger *
+                    .col-sm-8
+                        select#eg_partner.form-control.select2(name="eg_partner",placeholder='Partner')
+                            option(value="DNI") Diebold Nixdorf
+                            option(value="QI") Qualita
+                            option(value="CTI") Citius
+                            option(value="GTI") GTI
+                            option(value="AKO") Arkanindo
+                            option(value="UG") UG mandiri
+                .form-group.row 
+                    label.col-sm-3.control-label(for='eg_code') Kode Alias
+                        span.text-danger *
+                    .col-sm-6
+                        input#eg_code.form-control(name="eg_code",type='text',placeholder='Code')
+                    .col-sm-2
+                        a#btn_check.btn.btn-sm.btn-success(href="#") Check
+                .form-group.row 
+                    label.col-sm-3.control-label(for='eg_street') Location
+                        span.text-danger *
+                    .col-sm-8
+                        input#eg_street.form-control(name="eg_street",type='text',placeholder='Location')
+                .form-group.row 
+                    label.col-sm-3.control-label(for='eg_postal_code') Postal Code
+                    .col-sm-8
+                        input#eg_postal_code.form-control(name="eg_postal_code",type='text',placeholder='Postal Code')
+                .form-group.row 
+                    label.col-sm-3.control-label(for='eg_city') City
+                    .col-sm-8
+                        input#eg_city.form-control(name="eg_city",type='text',placeholder='City')
+                .form-group.row 
+                    label.col-sm-3.control-label(for='eg_area_code') Area Code
+                        span.text-danger *
+                    .col-sm-8
+                        input#eg_area_code.form-control(name="eg_area_code",type='text',placeholder='Area')
+                .form-group.row 
+                    label.col-sm-3.control-label(for='eg_fsl_code') FSL Code
+                        span.text-danger *
+                    .col-sm-8
+                        input#eg_fsl_code.form-control(name="eg_fsl_code",type='text',placeholder='Fsl Code')
+                .form-group.row 
+                    label.col-sm-3.control-label(for='eg_is_active') Active User
+                        span.text-danger *
+                    .col-sm-8
+                        select#eg_is_active.form-control(name="eg_is_active")
+                            option(value="N") Tidak
+                            option(value="Y") Ya
+                

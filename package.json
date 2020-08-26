@@ -1,0 +1,37 @@
+{
+  "name": "pos_cafe",
+  "version": "1.0.0",
+  "description": "Cafe POS Sys",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "author": "Aris Baskoro",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.5",
+    "csurf": "^1.11.0",
+    "debug": "^4.1.1",
+    "dotenv": "^8.2.0",
+    "exceljs": "^3.10.0",
+    "express": "^4.17.1",
+    "express-mysql-session": "^2.1.4",
+    "express-session": "^1.17.1",
+    "express-validator": "^6.6.0",
+    "http-errors": "^1.8.0",
+    "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "mysql2": "^2.1.0",
+    "pug": "^2.0.4",
+    "sharp": "^0.24.1",
+    "uuid": "^3.4.0"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "views/*",
+      "public/*"
+    ]
+  }
+}
