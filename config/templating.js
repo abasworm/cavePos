@@ -1,14 +1,15 @@
 module.exports = {
     ViewShow : async (view,data,req,res)=>{
         let datax = {
-            _AppTitle : "OPTIMUS PM",
-            _AppTitleSmall : "OPTIMUS PM",
-            _AppTitleAlias : "OPT",
-            _Copyright : "2020 DN, template Admin LTE 3",
-            _Version : "2.5.0",
+            _AppTitle : "POS SYSTEM",
+            _AppTitleSmall : "POS SYS",
+            _AppTitleAlias : "POS",
+            _Copyright : "template Admin LTE 3",
+            _Version : "1.0b",
             _UserName : req.session.fullname,
             _UserGroup : req.session.user_group,
             _UserRole : req.session.other_role,
+            _Sience : req.session.since,
             _uriPath : req.path
         };
         await Object.assign(datax,data);

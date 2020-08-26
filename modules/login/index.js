@@ -13,6 +13,21 @@ const _layout = {
     title : 'LOGIN FORM'
 }
 
+function toDateString(s){
+    var d = new Date(s);
+    Number.prototype.padLeft = function(base,chr){
+        var  len = (String(base || 10).length - String(this).length)+1;
+        return len > 0? new Array(len).join(chr || '0')+this : this;
+    }
+    var dformat = [d.getFullYear(),(d.getMonth()+1).padLeft(),
+        d.getDate().padLeft()].join('-')+
+        ' ' +
+      [ d.getHours().padLeft(),
+        d.getMinutes().padLeft(),
+        d.getSeconds().padLeft()].join(':');
+    return dformat;
+}
+
 route
     .get('/', (req,res,next)=>{
         if(!req.session.username){
@@ -35,10 +50,10 @@ route
                 let verify = await bcrypt.compare(data.password,User.data.password);
                 
                 if(verify){
-                    req.session.username = User.data.email;
+                    req.session.username = User.data.username;
                     req.session.fullname = User.data.name;
                     req.session.user_group = User.data.user_group;
-                    req.session.engineer_no = User.data.customer_no;
+                    req.session.since =  toDateString(User.data.created_date);
                     req.session.other_role = (User.data.other_role)?User.data.other_role:"";
                     rest.success(true,'Success Login',res);
                 }else{

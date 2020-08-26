@@ -17,10 +17,11 @@ section.sidebar
     // sidebar menu: : style can be found in sidebar.less
     ul.sidebar-menu(data-widget='tree')
         li.header MAIN NAVIGATION #{_UserGroup}
-        li
-            a(href='/dashboard')
-                i.fa.fa-dashboard
-                span Dashboard
+        - if ([1,2].includes(_UserGroup))
+            li
+                a(href='/dashboard')
+                    i.fa.fa-dashboard
+                    span Dashboard
         - if ([1].includes(_UserGroup))
             li.treeview
                 a(href='#')
@@ -41,7 +42,13 @@ section.sidebar
             li
                 a(href='/form_fe')
                     i.fa.fa-ticket(aria-hidden='true')
-                    span INPUT TICKET
+                    span Manager
+
+        - if ([1,3].includes(_UserGroup))
+            li
+                a(href='/form_fe')
+                    i.fa.fa-ticket(aria-hidden='true')
+                    span Kasir
        
         
 // /.sidebar
