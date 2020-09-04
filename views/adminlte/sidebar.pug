@@ -26,18 +26,18 @@ section.sidebar
             li.treeview
                 a(href='#')
                     i.fa.fa-book
-                    span Management Master
+                    span Master
                     span.pull-right-container
                         i.fa.fa-angle-left.pull-right
                 ul.treeview-menu
                     li
-                        a(href='/eg_master')
+                        a(href='/master_produk')
                             i.fa.fa-users(aria-hidden='true')
-                            span User
+                            span Produk
                     li
-                        a(href='/atm')
+                        a(href='/master_kategori')
                             i.fa.fa-building(aria-hidden='true')
-                            span ATM
+                            span Kategori
         - if ([1,2].includes(_UserGroup))
             li
                 a(href='/form_fe')

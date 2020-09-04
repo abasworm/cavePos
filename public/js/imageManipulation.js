@@ -1,7 +1,7 @@
 
-const imagePreview = "upload_files_display";
-const imageName = "fupload_files";
-const grayscale= true;
+const imagePreview = "image_path_display";
+const imageName = "fimage_path";
+const grayscale= false;
 const maxWidth = 600;
 let fileReader = new FileReader();
 

@@ -101,9 +101,13 @@ class formCreate{
                 return res;
             };
             let getOption = (data={},selected="")=>{
+                
                 let res = "<option> - Pilih - </option>" ;
+                
                 for(let key in data){
-                    res += `<option value="${key}" ${(selected==key)?"selected":""}>${data[key]}</option>`;
+                    let isSelected = (selected == key)?"selected='selected'":"";
+                    res += `<option value="${key}" ${isSelected}>${data[key]}</option>`;
+                    console.log(res);
                 }
                 return res;
             }

@@ -64,7 +64,6 @@ class validationJqBots {
         for(let i in this.fl){
             let imsg = i+"_message";
             if(this.fl[i].message.length>1){
-                console.log(i)
                 $(i).parents('.form-group')
                     .removeClass('has-success')
                     .addClass('has-error')

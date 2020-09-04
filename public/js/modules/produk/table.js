@@ -51,8 +51,8 @@ $(document).ready(async (e)=>{
     let colLabel = 'col-md-4';
     let colInput = 'col-md-8';
     let statusOption = {
-        'Y' : "WORKING",
-        'N' : "NOT WORKING"
+        1 : "WORKING",
+        2 : "NOT WORKING"
     }
 
      let cFormField; // variable to save form
@@ -61,15 +61,9 @@ $(document).ready(async (e)=>{
     for(field of _fieldToChange){
         let fieldName = field.underscoreToSpace().capitalize();
         switch(field){
-            case 'pm_partner_notes':
+            case 'image_path' :
                 cForm
-                .fText(field,colInput,5,10)
-                .label(fieldName,colLabel)
-                .formGroup('col-xs-6');
-                break;
-            case 'upload_files_partner' :
-                cForm
-                .fFile('upload_files',colInput,statusOption,'')
+                .fFile('image_path',colInput,statusOption,'')
                 .label('Upload Files',colLabel)
                 .formGroup('col-xs-6')
                 .attribute({
@@ -78,39 +72,20 @@ $(document).ready(async (e)=>{
                 });
                 break;
 
-            case 'atm_sn': case 'atm_id': case 'pm_ticket': case 'pm_period': case 'customer':
-            case 'atm_location':
-                cForm
-                .fInput(field,colInput)
-                .label(fieldName,colLabel)
-                .formGroup('col-xs-6')
-                .attribute({'readonly': true});
-            break;
-
-            case 'env_ups_status' :
-            case 'env_cctv_status':
-            case 'env_ac_status':
-            case 'env_it_transformer':
+            case 'kategori_id':
                 cForm
                 .fSelect(field,colInput,statusOption,'')
-                .label(fieldName,colLabel)
+                .label("Kategori",colLabel)
                 .formGroup('col-xs-6');
                 break;
             
-            case 'env_voltage'  : 
+            case 'produk_favorit':
                 cForm
-                .fNumber(field,colInput)
-                .label(fieldName,colLabel)
+                .fSelect(field,colInput,{'Y':"YA",'N':"Tidak"},'Y')
+                .label("Produk Favorit",colLabel)
                 .formGroup('col-xs-6');
                 break;
-            case 'pm_work_end'  :
-            case 'pm_work_start': 
-                cForm
-                .fInput(field,colInput)
-                .label(fieldName,colLabel)
-                .setClass('datetimepicker')
-                .formGroup('col-xs-6');
-                break;
+            
             default   :
                 cForm
                 .fInput(field,colInput)
@@ -164,20 +139,14 @@ $(document).ready(async (e)=>{
 async function resetForm(readonlyField){
     for(let field of _fieldToChange){
         switch(field){
-            case 'upload_files_partner':
-                $('#fupload_files').val('');
-                $('#upload_fiels_display').attr('src','');
+            case 'image_path':
+                await $('#fimage_path').val('');
+                await $('#image_path_display').attr('src','');
                 break;
-            case 'atm_sn': 
-            case 'atm_location': 
-            case 'customer': 
-            case 'atm_id': 
-            case 'pm_ticket':
-            case 'pm_period': 
-                $(`#fmain #f${field}`).val('').readonly();
-                break;
+            case 'produk_favorit':
+                await $(`#fproduk_favorit`).val('N').readonly(false);
             default:
-                $(`#fmain #f${field}`).val('').readonly(false);
+                await $(`#fmain #f${field}`).val('').readonly(false);
                 break;
         }
     }
@@ -203,16 +172,8 @@ async function validateEdit(evt){
 
 async function completeEdit(results){
     for(let key in await results){
-        if(key == 'upload_files_partner'){
-            $('#upload_files_display').attr('src',results[key]);
-        }
-        
-        if(key == 'pm_work_start' || key == 'pm_work_end'){
-            $(`#f${key}`).readonly(false);
-            if(results[key]){
-                $(`#f${key}`).val(toDateString(results[key]));
-                $(`#f${key}`).data('valueBefore',toDateString(results[key]));
-            }
+        if(key == 'image_path'){
+            $('#image_path_display').attr('src',results[key]);
         }else{
             $(`#f${key}`).val(results[key]);
             $(`#f${key}`).data('valueBefore',results[key]);
@@ -222,14 +183,12 @@ async function completeEdit(results){
 
 async function completeView(results){
     for(let key in await results){
-        if(key == 'pm_work_start' || key == 'pm_work_end'){
-            $(`#f${key}`).readonly();
-            $(`#f${key}`).val(toDateString(results[key]));
+        if(key == 'image_path'){
+            $('#image_path_display').attr('src',results[key]);
         }else{
             $(`#f${key}`).readonly();
             $(`#f${key}`).val(results[key]);
         }
-        
     }
 }
 
@@ -266,33 +225,7 @@ async function generateColumnOption(){
                     }
                 }
                 break;
-            case 'pm_work_start':
-            case 'pm_work_end' :
-                fieldOptions = {
-                    field: key,
-                    title: _table_head[key],
-                    sortable:true,
-                    formatter:(value,row,index)=>{
-                        return (toDateString(value).indexOf('1970',0))?toDateString(value):"-";
-                    }
-                }
-                break;
-            case 'pm_status':
-                fieldOptions = {
-                    field: key,
-                    title: _table_head[key],
-                    sortable:true,
-                    formatter:(value,row,index)=>{
-                        let x = '';
-                        switch(value){
-                            case 'NEW': x = `<span class="label bg-green">${value}</span>`;break;
-                            case 'PROCESSED': x = `<span class="label bg-blue">${value}</span>`;break;
-                            default : x = ` <span class="label bg-green">${value}</span>`;break;
-                        }
-                        return x;
-                    }
-                }
-                break;
+            
             default:
                 fieldOptions = {
                     field: key,
@@ -321,7 +254,7 @@ async function add(){
     validationForm.reset();
 
     //show modal
-    $modalForm.modal({
+    await $modalForm.modal({
         backdrop: 'static',
         keyboard: false
     });
@@ -329,11 +262,11 @@ async function add(){
     //button change click 
     $buttonAction.html('Save');
 
-    //reset form
-    await resetForm();
-
     //form main changed
     $("#fmain").change(validateAdd);
+
+    //reset form
+    await resetForm();
 }
 
 async function edit(id){
@@ -463,7 +396,7 @@ const _x = {
         insert:async ()=>{
             const form = document.getElementById(FormName);
             const formToUpload = new FormData(form);
-            const imgUrl = $('#upload_files_display').prop('src');
+            const imgUrl = $('#image_path_display').prop('src');
             
             if(imgUrl){
                 const block = imgUrl.split(";");
@@ -471,7 +404,7 @@ const _x = {
                 const realData = block[1].split(',')[1];
                 const blob = base64toBlob(realData,contentType);
                 formToUpload.append('upload_file',blob);
-                formToUpload.delete('upload_files');
+                formToUpload.delete('image_path');
             }else{
                 formToUpload.append('upload_file','');
             }
@@ -486,7 +419,7 @@ const _x = {
         update:async ()=>{
             const form = document.getElementById(FormName);
             const formToUpload = new FormData(form);
-            const imgUrl = $('#upload_files_display').prop('src');
+            const imgUrl = $('#image_path_display').prop('src');
             
             if(imgUrl.indexOf(',')>=0){
                 const block = await imgUrl.split(";");
@@ -495,7 +428,7 @@ const _x = {
                 const blob = await base64toBlob(realData,contentType);
                 console.log(blob);
                 formToUpload.append('upload_file',blob);
-                formToUpload.delete('upload_files');
+                formToUpload.delete('image_path');
             }else{
                 const blob = new Blob('',{type:"image/jpeg"})
                 formToUpload.append('upload_file','');

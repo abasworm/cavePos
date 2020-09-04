@@ -1,0 +1,59 @@
+extends ../adminlte/layout
+
+block header
+    link(rel='stylesheet', href='/plugins/bootstrap-table-master/bootstrap-table.min.css')
+    link(rel='stylesheet', href='/plugins/toastr/toastr.min.css')
+    link(rel="stylesheet", href="/adminlte/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css")
+    link(rel='stylesheet', href='/adminlte/bower_components/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css')
+    
+    link(rel='stylesheet', href='/adminlte/bower_components/select2/dist/css/select2.min.css')
+
+block footer
+    script(src='/adminlte/bower_components/moment/min/moment.min.js')
+    script(src='/adminlte/bower_components/select2/dist/js/select2.full.min.js')
+    script(src="/adminlte/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js")
+    script(src='/adminlte/bower_components/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js')
+    script(type='text/javascript', src='/plugins/bootstrap-table-master/bootstrap-table.min.js')
+    script(type='text/javascript', src='/plugins/bootstrap-table-master/extensions/export/bootstrap-table-export.min.js')
+    script(type='text/javascript', src='/plugins/JqTableExport/tableExport.min.js')
+    script(type='text/javascript', src='/plugins/JqTableExport/libs/jsPDF/jspdf.min.js')
+    script(type='text/javascript', src='/plugins/JqTableExport/libs/jsPDF-AutoTable/jspdf.plugin.autotable.js')
+    script(type='text/javascript', src='/plugins/toastr/toastr.min.js')
+    script(type='text/javascript', src='/js/abas_validation.js')
+    script(type='text/javascript', src='/js/class.formCreator.js')
+    script(type='text/javascript', src='/js/imageManipulation.js')
+    script(src="/js/modules/produk/table.js")
+
+block content
+    .col-xs-12
+         .box
+            .box-header
+                h3.box-title
+                    b #{title} 
+                    
+                // /.box-header
+                a.btn.btn-primary.pull-right(href='javascript:add();') 
+                    i.fa.fa-plus(aria-hidden='true') &nbsp;
+                    | Add
+            .box-body
+                table#dt_table.table.table-bordered.table-hover
+
+    #modal_form.modal.fade(role="dialog")
+        .modal-dialog.modal-lg
+            .modal-content
+                .modal-header
+                    button.close(data-dismiss="modal",type="button") &times;
+                    h4.modal-tittle Form
+                .modal-body
+                    #formField
+                    
+                .modal-footer
+                    button#btn_u.btn.btn-primary(type="button")
+                    button.btn.btn-default(data-dismiss="modal",type="button") Close
+
+    script. 
+            //global variable
+            const _table_head = !{JSON.stringify(tbls)};
+            const _link = '!{_link}';
+            const _fieldToChange = !{JSON.stringify(fieldToChange)};
+            const _fieldRequired = !{JSON.stringify(fieldRequired)};
